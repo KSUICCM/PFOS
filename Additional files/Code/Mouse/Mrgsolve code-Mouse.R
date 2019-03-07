@@ -1,4 +1,4 @@
-##translated into mrgsolve by Miao Li based on PFOA desolve code from Wei-Chun Chou (revised Worley et al. 2015)
+##translated into mrgsolve by Miao Li based on PFOS desolve code from Wei-Chun Chou (revised Worley et al. 2015)
 
 micePBPK.code <- '
 $PARAM @annotated
@@ -19,22 +19,22 @@ PRest               :   0.20  : Unitless,            Restofbody/plasma PC (Locci
 MW                  : 500.126 : g/mol,               PFOS molecular mass 
 MKC                 : 0.0084  : Unitless,            Fraction mass of kidny (percent of BW); Brown, 1997
 Free                : 0.09    : Unitless,            Free fraction; (Worley and Fisher et al., 2015) 
-Vmax_baso_invitro   : 393.45  : pmol/mg protein/min, Vmax of basolateral transporter; averaged in vitro value of rOAT1 and rOAT3 (Nakagawa, 2007); initial value asumsed the same as PFOA (Worley and Fisher, 2015)
-Km_baso             :  27.2   : mg/L,                Km of basolateral transpoter, averaged in vitro value of rOAT1 and rOAT3 (Nakagawa, 2007);initial value asumsed the same as PFOA (Worley and Fisher, 2015)
-Vmax_apical_invitro :  9300   : pmol/mg protein/min, Vmax of apical transporter; averaged invitro value of Oatp1a1 (Weaver, 2010);initial value asumsed the same as PFOA (Worley and Fisher, 2015)
-Km_apical           :  52.3   : mg/L,                Km of apical transpoter, in vitro value for Oatp1a1 (Weaver, 2010); initial value asumsed the same as PFOA (Worley and Fisher, 2015) 
-RAFbaso             :  3.99   : Unitless,            Relative activity factor, basolateral transpoters (male); initial value asumsed the same as PFOA (Worley and Fisher, 2015)
-RAFapi              :  4.07   : Unitless,            Relative acitivty factor, apical transpoters; initial value asumsed the same as PFOA (Worley and Fisher, 2015)
+Vmax_baso_invitro   : 393.45  : pmol/mg protein/min, Vmax of basolateral transporter; averaged in vitro value of rOAT1 and rOAT3 (Nakagawa, 2007); initial value asumsed the same as PFOS (Worley and Fisher, 2015)
+Km_baso             :  27.2   : mg/L,                Km of basolateral transpoter, averaged in vitro value of rOAT1 and rOAT3 (Nakagawa, 2007);initial value asumsed the same as PFOS (Worley and Fisher, 2015)
+Vmax_apical_invitro :  9300   : pmol/mg protein/min, Vmax of apical transporter; averaged invitro value of Oatp1a1 (Weaver, 2010);initial value asumsed the same as PFOS (Worley and Fisher, 2015)
+Km_apical           :  52.3   : mg/L,                Km of apical transpoter, in vitro value for Oatp1a1 (Weaver, 2010); initial value asumsed the same as PFOS (Worley and Fisher, 2015) 
+RAFbaso             :  3.99   : Unitless,            Relative activity factor, basolateral transpoters (male); initial value asumsed the same as PFOS (Worley and Fisher, 2015)
+RAFapi              :  4.07   : Unitless,            Relative acitivty factor, apical transpoters; initial value asumsed the same as PFOS (Worley and Fisher, 2015)
 protein             :  2.0e-6 : mg protein/cell,     Amount of protein in proximal tubule cells (Addis et al., 1936)
 GFRC                :  59     : L/hr/kg kiney,       Glomerular filtration rate (male); (Zhonghua et al., 2004)
-Kdif                :   0.001 : L/h, Diffusion       rate from proximal tubule cells; initial value asumsed the same as PFOA (Worley and Fisher, 2015) 
+Kdif                :   0.001 : L/h, Diffusion       rate from proximal tubule cells; initial value asumsed the same as PFOS (Worley and Fisher, 2015) 
 Kabsc               :   2.12  : 1/(h*BW^-0.25),      Rate of absorption of chemical from small intestine to liver (initial value from Worley and Fisher, 2015 and then re-fitting)                        
-KunabsC             : 7.05e-5 : 1/(h*BW^-0.25),      Rate of unabsorbed dose to appear in feces (initial value assumed the same with PFOA (7.05e-5) from worley et al., 2015 and then re-fitting)
+KunabsC             : 7.05e-5 : 1/(h*BW^-0.25),      Rate of unabsorbed dose to appear in feces (initial value assumed the same with PFOS (7.05e-5) from worley et al., 2015 and then re-fitting)
 GEC                 :   0.540 : 1/(h*BW^0.25),       Gastric emptying time  (assumed the same with rat, yang et al., 2013)
-K0C                 :   1.000 : 1/(h*BW^-0.25),      Rate of uptake from the stomach into the liver (initial value assumed the same with PFOA from Worley and Fisher, 2015)
-KeffluxC            :   2.49  : 1/(h*BW^-0.25),      Rate of clearance of PFOS from proximal tubule cells into blood (initial value assumed the same with PFOA (2.49) from Worley and Fisher, 2015 and then re-fitting)
-KbileC              :  0.004  : 1/(h*BW^-0.25),      Biliary elimination rate (male); liver to feces storage (initial value assumed the same with PFOA (0.004) from Worley and Fisher, 2015 and then re-fitting)  
-KurineC             :  1.60   : 1/(h*BW^-0.25),      Rate of urine elimination from urine storage (male) (initial value assumed the same with PFOA (0.002) from Worley and Fisher, 2015 and then re-fitting)  
+K0C                 :   1.000 : 1/(h*BW^-0.25),      Rate of uptake from the stomach into the liver (initial value assumed the same with PFOS from Worley and Fisher, 2015)
+KeffluxC            :   2.49  : 1/(h*BW^-0.25),      Rate of clearance of PFOS from proximal tubule cells into blood (initial value assumed the same with PFOS (2.49) from Worley and Fisher, 2015 and then re-fitting)
+KbileC              :  0.004  : 1/(h*BW^-0.25),      Biliary elimination rate (male); liver to feces storage (initial value assumed the same with PFOS (0.004) from Worley and Fisher, 2015 and then re-fitting)  
+KurineC             :  1.60   : 1/(h*BW^-0.25),      Rate of urine elimination from urine storage (male) (initial value assumed the same with PFOS (0.002) from Worley and Fisher, 2015 and then re-fitting)  
 
 $MAIN
 double QC = QCC*pow(BW, 0.75)*(1-Htc);               // L/h, Cardiac output (adjusted for plasma)

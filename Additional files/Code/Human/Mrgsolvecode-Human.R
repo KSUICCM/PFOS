@@ -1,4 +1,4 @@
-##translated into mrgsolve by W.C.CHOU based on PFOA desolve code from Wei-Chun Chou (revised Worley et al. 2015)
+##translated into mrgsolve by W.C.CHOU based on PFOS desolve code from Wei-Chun Chou (revised Worley et al. 2015)
 
 library(mrgsolve)  # for PBPK model
 
@@ -34,7 +34,7 @@ Kabsc               :   2.120 : 1/(h*BW^0.25), Rate of absorption of chemical fr
 KunabsC             : 7.06e-5 : 1/(h*BW^0.25), Rate of unabsorbed dose to appear in feces (fit to data)
 GEC                 :   3.500 : 1/(h*BW^0.25), Gastric emptying time (Yang, 2013)
 K0C                 :   1.000 : 1/(h*BW^0.25),  Rate of uptake from the stomach into the liver (fit to data)
-KeffluxC            :   0.100 : 1/(h*BW^0.25), Rate of clearance of PFOA from proximal tubule cells into blood
+KeffluxC            :   0.100 : 1/(h*BW^0.25), Rate of clearance of PFOS from proximal tubule cells into blood
 KbileC              :   0.0001: 1/(h*BW^0.25), Biliary elimination rate (male); liver to feces storage (fit to data)  
 KurineC             :   0.063 : 1/(h*BW^0.25), Rate of urine elimination from urine storage (male) (fit to data)
 Kvoid               : 0.06974 : (L/hr), Daily urine volume rate (L/hr); Van Haarst, 2004
@@ -90,8 +90,8 @@ $ODE
 // dxdt_AOG = RDOSEoral  
 
 // Concentrations in the tissues and in the capillary blood of the tissues
-double CA_free = APlas_free/VPlas; // mg/L, Free PFOAC oncentration in the plasma
-double CA = CA_free/Free; // mg/L, Concentration of total PFOA in plasma
+double CA_free = APlas_free/VPlas; // mg/L, Free PFOSC oncentration in the plasma
+double CA = CA_free/Free; // mg/L, Concentration of total PFOS in plasma
 
 double CL = AL/VL; // mg/L, Concentration of parent drug in the tissue of liver
 double CVL = CL/PL; // mg/L, Concentration of parent drug in the capillary blood of liver
@@ -106,8 +106,8 @@ double CVRest = CRest/PRest; // mg/L, Concentration of parent drug in the capill
 // Kidney compartment plus 2 subcompartment (Proximal Tubule cells: PTC, Filtrate: Fil)
 // Concentration in kidney, PTC and fil
 
-double CPTC = APTC/VPTC; // mg/L, Concetraitons of PFOA in PTC blood
-double Cfil = AFil/Vfil; // mg/L, Concetraitons of PFOA in FIL blood
+double CPTC = APTC/VPTC; // mg/L, Concetraitons of PFOS in PTC blood
+double Cfil = AFil/Vfil; // mg/L, Concetraitons of PFOS in FIL blood
 
 // Virtural compartment: 
 // Basolateral (baso) 
@@ -126,24 +126,24 @@ dxdt_Aefflux = RAefflux;  //  mg, Amount of efflux clearance rate from PTC to bl
 double RCI = CA*GFR*Free; //  mg/h, Rate of clerance (CL) to via glormerular filtration (GFR) 
 dxdt_ACI = RCI; // mg, Amount of clearance via GFR
 
-// {PFOA distribution in each compartment}
+// {PFOS distribution in each compartment}
 
-// PFOA in plasma
+// PFOS in plasma
 double RPlas_free = (QRest*CVRest*Free)+(QK*CVK*Free)+(QL*CVL*Free)-(QC*CA*Free)+RAefflux; // mg/h, Rate of change in the plasma
 double RPlas = (QRest*CVRest)+(QK*CVK)+(QL*CVL)-(QC*CA);
 dxdt_APlas_free = RPlas_free; // mg, Amount in the plasma
 dxdt_APlas = RPlas; // mg, Amount in the plasma
-dxdt_AUCCA_free = CA_free; // mg*h/L, Area under curve of PFOA in liver compartment
+dxdt_AUCCA_free = CA_free; // mg*h/L, Area under curve of PFOS in liver compartment
 
 // Proximal Tubule Cells (PTC)
 double RPTC = Rdif + RA_apical + RA_baso - RAefflux; // mg/h, Rate of change in PTC 
 dxdt_APTC = RPTC; // mg, Amount moved in PTC
-dxdt_AUCCPTC = CPTC; // mg*h/L, Area under curve of PFOA in the compartment of PTC
+dxdt_AUCCPTC = CPTC; // mg*h/L, Area under curve of PFOS in the compartment of PTC
 
 // Proximal Tubule Lumen/ Filtrate (Fil)
 double Rfil = CA*GFR*Free - RA_apical - AFil*Kurine; // mg/h, Rate of change in Fil
 dxdt_AFil = Rfil; // mg, Amount moved in Fil
-dxdt_AUCfil = Cfil; // mg*h/L, Area under curve of PFOA in the compartment of Fil
+dxdt_AUCfil = Cfil; // mg*h/L, Area under curve of PFOS in the compartment of Fil
 
 // Urine elimination
 double Rurine = Kurine*AFil; // mg/h, Rate of change in urine
@@ -154,12 +154,12 @@ double Curine = Rurine/Kvoid; //
 // Kidney compartment
 double RKb = QK*(CA-CVK)*Free - CA*GFR*Free - Rdif - RA_baso; // mg/h, Rate of change in Kidney caomprtment
 dxdt_AKb = RKb; // mg, Amount in kidney compartment
-dxdt_AUCKb = CK; // mg*h/L, Area under curve of PFOA in the Kidney compartment
+dxdt_AUCKb = CK; // mg*h/L, Area under curve of PFOS in the Kidney compartment
 
-// PFOA in the compartment of rest of body, flow-limited model
+// PFOS in the compartment of rest of body, flow-limited model
 double RRest = QRest*(CA-CVRest)*Free; // mg/h, Rate of change in rest of body
 dxdt_ARest = RRest; // mg, Amount in rest of body 
-dxdt_AUCCRest = CRest; // mg*h/L, Area under curve of PFOA in the compartment of rest of body
+dxdt_AUCCRest = CRest; // mg*h/L, Area under curve of PFOS in the compartment of rest of body
     
 // Gastrointestinal (GI) tract
 // Stomach compartment
@@ -174,17 +174,17 @@ double RabsSI = Kabs*ASI; // mg/h, Rate of absorption in the Small intestine
 dxdt_AabsSI = RabsSI; // mg, Amount absorbed in the Small intestine
 double Total_oral_uptake = AabsSI + AabsST; // mg, Total oral uptake in the GI
 // Biliary excretion
-double Abile = Kbile*AL; // mg, Amount of PFOA in bile excretion
-double amount_per_gram_liver = (AL/ML)*1000; // ug/g, Amount of PFOA in liver per gram liver
+double Abile = Kbile*AL; // mg, Amount of PFOS in bile excretion
+double amount_per_gram_liver = (AL/ML)*1000; // ug/g, Amount of PFOS in liver per gram liver
 // Feces compartment
 double Rfeces = Kbile*AL+ Kunabs*ASI; // mg/h, Rate of change in feces compartment
 dxdt_Afeces = Rfeces; // mg, Amount of the feces compartment
 //double percentOD_in_feces = (Afeces/Odose)*100; Percent of the oral dose in the feces
 
-// PFOA in liver compartment, flow-limited model
+// PFOS in liver compartment, flow-limited model
 double RL = QL*(CA-CVL)*Free - Kbile*AL + Kabs*ASI + K0*AST; // mg/h, Rate of chagne in liver caomprtment
 dxdt_AL = RL; // mg, Amount in liver compartment
-dxdt_AUCCL = CL; // mg*h/L, Area under curve of PFOA in liver compartment
+dxdt_AUCCL = CL; // mg*h/L, Area under curve of PFOS in liver compartment
 
 
 $TABLE

@@ -977,8 +977,8 @@ p2.human.D <- p2.human.D +
 
 ## Modified the theme
 ## plot
-p2.human.A = p2.human.A + Theme.Fig + labs (x ="Times (years)", y="")
-p2.human.D = p2.human.D + Theme.Fig + labs (x ="Times (years)", y="")
+p2.human.A = p2.human.A + Theme.Fig + labs (x ="Time (years)", y="")
+p2.human.D = p2.human.D + Theme.Fig + labs (x ="Time (years)", y="")
 p1.h       = p1.h + Theme.Fig2 + labs (x ="Organs", y="")
 
 p2.human.A
